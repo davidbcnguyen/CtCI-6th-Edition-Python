@@ -25,6 +25,17 @@ def urlify_pythonic(text, length):
     """solution using standard library"""
     return text[:length].replace(" ", "%20")
 
+def my_urlify(url, n):
+    temp = list(url)
+    i_from_back = len(url)
+    for i in reversed(range(n)):
+        if url[i] == " ":
+            temp[i_from_back - 3:i_from_back] = "%20"
+            i_from_back -= 3
+        else:
+            temp[i_from_back - 1] = url[i]
+            i_from_back -= 1
+    return "".join(temp[i_from_back:])
 
 class Test(unittest.TestCase):
     """Test Cases"""
@@ -35,7 +46,7 @@ class Test(unittest.TestCase):
         (" a b    ", 4): "%20a%20b",
         (" a b       ", 5): "%20a%20b%20",
     }
-    testable_functions = [urlify_algo, urlify_pythonic]
+    testable_functions = [urlify_algo, urlify_pythonic, my_urlify]
 
     def test_urlify(self):
         for urlify in self.testable_functions:

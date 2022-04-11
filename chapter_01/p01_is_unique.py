@@ -68,6 +68,13 @@ def is_unique_chars_sorting(string: str) -> bool:
         last_character = char
     return True
 
+def my_is_unique(string):
+    s = set()
+    for c in string:
+        if c in s:
+            return False
+        s.add(c)
+    return True
 
 class Test(unittest.TestCase):
     test_cases = [
@@ -86,6 +93,7 @@ class Test(unittest.TestCase):
         is_unique_chars_using_dictionary,
         is_unique_chars_using_set,
         is_unique_chars_sorting,
+        my_is_unique
     ]
 
     def test_is_unique_chars(self):

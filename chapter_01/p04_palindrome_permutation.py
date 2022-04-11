@@ -57,6 +57,14 @@ def is_palindrome_permutation_pythonic(phrase):
     counter = Counter(clean_phrase(phrase))
     return sum(val % 2 for val in counter.values()) <= 1
 
+def my_palindrome(string :str):
+    c = Counter(clean_phrase(string))
+    odd = 0
+    for char, i in c.items():
+        if i % 2 == 1:
+            odd += 1
+    return odd <= 1
+
 
 class Test(unittest.TestCase):
     test_cases = [
@@ -79,6 +87,7 @@ class Test(unittest.TestCase):
         is_palindrome_permutation,
         is_palindrome_bit_vector,
         is_palindrome_permutation_pythonic,
+        my_palindrome
     ]
 
     def test_pal_perm(self):

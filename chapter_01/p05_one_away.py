@@ -39,6 +39,42 @@ def one_edit_insert(s1, s2):
     return True
 
 
+def my_one_away(s1, s2):
+    # 3 cases
+    if len(s1) == len(s2):
+        return my_one_away_same_length(s1, s2)
+    if len(s1) + 1 == len(s2):
+        return my_one_away_s1_less(s1, s2)
+    if len(s1) - 1 == len(s2):
+        return my_one_away_s1_less(s2, s1)  # noqa
+    return False
+
+def my_one_away_s1_less(s1, s2):
+    i, j = 0, 0
+    edited = False
+    while i < len(s1) and j < len(s2):
+        if s1[i] != s2[j]:
+            if edited:
+                return False
+            edited = True
+            j += 1
+        else:
+            i += 1
+            j += 1
+    return True
+
+def my_one_away_same_length(s1, s2):
+    i = 0
+    edited = False
+    while i < len(s1):
+        if s1[i] != s2[i]:
+            if edited:
+                return False
+            edited = True
+        i += 1
+    return True
+
+
 class Test(unittest.TestCase):
     test_cases = [
         # no changes
@@ -70,7 +106,7 @@ class Test(unittest.TestCase):
         ("ale", "elas", False),
     ]
 
-    testable_functions = [are_one_edit_different]
+    testable_functions = [are_one_edit_different, my_one_away]
 
     def test_one_away(self):
 

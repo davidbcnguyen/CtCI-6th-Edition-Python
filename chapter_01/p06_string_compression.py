@@ -19,6 +19,20 @@ def compress_string(string):
     # returns original string if compressed string isn't smaller
     return min(string, "".join(compressed), key=len)
 
+def my_compression(string):
+    compressed = []
+    count = 0
+    for i in range(len(string)):
+        if i != 0 and string[i - 1] != string[i]:
+            compressed.append(string[i - 1] + str(count))
+            count = 0
+        count += 1
+
+    if count:
+        compressed.append(string[-1] + str(count))
+    return min(string, "".join(compressed), key=len)
+
+
 
 class Test(unittest.TestCase):
     test_cases = [
@@ -31,6 +45,7 @@ class Test(unittest.TestCase):
     ]
     testable_functions = [
         compress_string,
+        my_compression
     ]
 
     def test_string_compression(self):
